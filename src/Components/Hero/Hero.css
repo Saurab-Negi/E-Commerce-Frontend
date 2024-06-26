@@ -1,0 +1,13 @@
+.hero{
+    background: linear-gradient(180deg, #fde1ff, #e1ffea22 60%);
+}
+
+.hero-left p{
+    color: #171717;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+/* .hero-hand-icon, .hero-left, .hero-right{
+    border: 1px solid black;
+} */
