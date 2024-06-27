@@ -1,0 +1,9 @@
+.offers{
+    background: linear-gradient(180deg, #fde1ff 0%, #e1ffea22 60%);
+}
+
+.offers-left h1{
+    color: #171717;
+    font-size: 4rem;
+    font-weight: 500;
+}

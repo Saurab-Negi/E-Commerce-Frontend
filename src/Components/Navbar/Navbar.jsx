@@ -9,7 +9,7 @@ export default function Navbar() {
     const [menu, setMenu]= useState('shop'); // Initially it will be on shops
 
   return (
-    <div className='navbar flex justify-around p-[1rem] shadow-custom'>
+    <div className='navbar w-full flex justify-around p-[1rem]'>
 
         <div className="nav-logo flex items-center gap-[1rem]">
             <img src={logo} alt="" />

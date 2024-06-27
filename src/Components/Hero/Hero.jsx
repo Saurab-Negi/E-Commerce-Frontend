@@ -5,9 +5,9 @@ import hero_img from '../Assets/hero_image.png'
 
 const Hero = () => {
   return (
-    <div className="hero h-[100vh] flex ">
+    <div className="hero flex py-8 mb-16">
       
-    <div className="hero-left flex flex-1 flex-col justify-center gap-5 pl-[11.5rem]">
+    <div className="hero-left flex flex-1 flex-col justify-center pl-[11.5rem]">
         <h2 className='text-[#090909] text-[1.5rem] font-medium'>New Arrivals</h2>
 
         <div className="">
@@ -26,7 +26,7 @@ const Hero = () => {
     </div>
 
     <div className="hero-right flex flex-1 justify-center">
-        <img src={hero_img} alt="" />
+        <img className='w-[80%]' src={hero_img} alt="" />
     </div>
         
     </div>
