@@ -36,7 +36,7 @@ const ShopCategory = (props) => {
         })}
       </div>
 
-      <button className="shop-category-explore-btn mt-[4rem] px-[5rem] py-[1.5rem] rounded-full bg-[#ededed] text-[#6c6c6c] text-[1.2rem] shadow-custom">
+      <button className="shop-category-explore-btn mt-[4rem] px-[5rem] py-[1.5rem] rounded-full bg-[#ededed] text-[#6c6c6c] text-[1.2rem] shadow-customBtn">
         Explore More
       </button>
 

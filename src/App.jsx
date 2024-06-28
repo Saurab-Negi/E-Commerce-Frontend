@@ -4,9 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './Components/Navbar/Navbar'
 import Shop from './Pages/Shop';
 import ShopCategory from './Pages/ShopCategory/ShopCategory';
-import Product from './Pages/Product';
-import Cart from './Pages/Cart';
-import Auth from './Pages/Auth';
+import Product from './Pages/Product/Product';
+import Cart from './Pages/Cart/Cart';
+import Auth from './Pages/Auth/Auth';
 import Footer from './Components/Footer/Footer';
 import men_banner from './Components/Assets/banner_mens.png';
 import women_banner from './Components/Assets/banner_women.png';
@@ -27,11 +27,11 @@ export default function App() {
           <Route path=':productId' element={<Product/>} />
         </Route>
         <Route path='/cart' element={<Cart/>} />
-        <Route path='/login' element={<Auth/>} />
+        <Route path='/login' element={<Auth />} />
       </Routes>
 
       <Footer/>
-      </BrowserRouter>      
+      </BrowserRouter>
     </div>
   )
 }

@@ -1,3 +1,7 @@
+.navbar{
+    border-bottom: 1px solid rgb(186, 186, 186);
+}
+
 .nav-menu li{
     display: flex;
     flex-direction: column;

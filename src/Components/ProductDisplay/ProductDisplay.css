@@ -1,0 +1,21 @@
+.productdisplay-img-list img{
+    width: 14.5rem;
+    border-radius: 6px;
+}
+
+.productdisplay-right-size-no div{
+    padding: 1rem 1.5rem;
+    background-color: #fbfbfb;
+    border: 1px solid #bababa;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.productdisplay-right-category{
+    margin-top: 0.6rem;
+}
+
+.productdisplay-right-category span{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
