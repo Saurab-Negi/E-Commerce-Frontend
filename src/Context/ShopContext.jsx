@@ -1,14 +1,61 @@
-import React, { createContext } from 'react'
-import all_product from '../Components/Assets/all_product'
+import { createContext, useState } from 'react';
+import all_product from '../Components/Assets/all_product';
 
-// createContext is a function in React that is used to create a Context object. A context provides a way to pass data through the component tree without having to pass props down manually at every level. This can be particularly useful for global state management, theming, or any other scenario where data needs to be accessible across many components.
+export const ShopContext = createContext(null);
 
-export const ShopContext= createContext(null);
+const getDefaultCart = () => {
+    let cart = {};
+    for (let i = 0; i < all_product.length; i++) {
+        cart[i] = 0;
+    }
+    return cart;
+}
 
-const ShopContextProvider= (props) =>{
-    const contextValue= {all_product};
+const ShopContextProvider = (props) => {
+    const [cartItems, setCartItems] = useState(getDefaultCart());
 
-    return(
+    const addToCart = (itemId) => {
+        setCartItems((prev) => {
+            const updatedCart = { ...prev, [itemId]: prev[itemId] + 1 };
+            console.log(updatedCart);
+            return updatedCart;
+        });
+    }
+
+    const removeFromCart = (itemId) => {
+        setCartItems((prev) => {
+            const newCartItems = { ...prev };
+            if (newCartItems[itemId] > 0) {
+                newCartItems[itemId]--;
+            }
+            return newCartItems;
+        });
+    }
+
+    const getTotalCartAmount = () => {
+        let totalAmount = 0;
+        for (const item in cartItems) {
+            if (cartItems[item] > 0) {
+                let itemInfo = all_product.find((product) => product.id === Number(item));
+                totalAmount += itemInfo.new_price * cartItems[item];
+            }
+        }
+        return totalAmount;
+    }
+
+    const getTotalCartItems= () =>{
+        let totalItem= 0;
+        for(const item in cartItems){
+            if(cartItems[item]>0){
+                totalItem+= cartItems[item];
+            }
+        }
+        return totalItem;
+    }
+
+    const contextValue = { all_product, cartItems, addToCart, removeFromCart, getTotalCartAmount, getTotalCartItems };
+
+    return (
         <ShopContext.Provider value={contextValue}>
             {props.children}
         </ShopContext.Provider>

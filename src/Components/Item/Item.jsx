@@ -6,7 +6,7 @@ const Item = (props) => {
   const {id, image, name, new_price, old_price}= props;
 
   return (
-    <div className="item w-[18rem] rounded-lg cursor-pointer shadow-custom">
+    <div className="item w-[18rem] rounded-lg cursor-pointer shadow-custom" onClick={window.scrollTo(0,0)}>
 
         <Link to={`/product/${id}`}>
           <div className="item-img overflow-hidden">

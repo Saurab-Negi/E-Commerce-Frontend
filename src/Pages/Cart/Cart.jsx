@@ -1,7 +1,9 @@
+import CartItems from "./CartItems"
+
 const Cart = () => {
   return (
     <div>
-      
+      <CartItems />
     </div>
   )
 }

@@ -1,0 +1,13 @@
+.cartitems-total-item{
+    display: flex;
+    justify-content: space-between;
+    margin: 0.7rem 0;
+}
+
+.cartitems-format-main{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    place-items: center;
+    gap: 2rem;
+    padding-top: 16px;
+}

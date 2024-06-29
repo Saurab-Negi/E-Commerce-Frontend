@@ -5,6 +5,7 @@ import BreadCrum from '../../Components/BreadCrum/BreadCrum';
 import { ShopContext } from '../../Context/ShopContext'
 import ProductDisplay from '../../Components/ProductDisplay/ProductDisplay';
 import Description from '../../Components/Description/Description';
+import RelatedProducts from '../../Components/RelatedProducts/RelatedProducts';
 
 const Product = () => {
 
@@ -18,6 +19,7 @@ const Product = () => {
     <BreadCrum product={product} />
     <ProductDisplay product={product} />
     <Description />
+    <RelatedProducts />
 
     </div>
   )

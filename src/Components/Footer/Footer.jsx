@@ -6,7 +6,7 @@ import whats_icon from '../Assets/whatsapp_icon.png'
 
 const Footer = () => {
   return (
-    <div className='footer flex flex-col justify-center items-center py-8 gap-[3rem]' >
+    <div className='footer w-full flex flex-col justify-center items-center py-8 gap-[3rem]' >
       
         <div className="footer-logo flex items-center gap-[2rem]">
             <img src={footer_logo} alt="" />
