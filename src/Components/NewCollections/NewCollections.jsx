@@ -1,8 +1,22 @@
 import './NewCollections.css'
 import Item from '../Item/Item'
-import new_collection from '../Assets/new_collections.js'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const NewCollections = () => {
+
+  const [new_collection, setNew_Collection]= useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/collection/newcollection')
+        .then((response) => {
+            setNew_Collection(response.data);
+        })
+        .catch((error) => {
+            console.error('Error fetching the data', error);
+        });
+}, []);
+
   return (
     <div className='new-collections w-full flex flex-col items-center gap-2 mb-[6rem]'>
 

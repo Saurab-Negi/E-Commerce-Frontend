@@ -9,8 +9,8 @@ const Item = (props) => {
     <div className="item w-[18rem] rounded-lg cursor-pointer shadow-custom" onClick={window.scrollTo(0,0)}>
 
         <Link to={`/product/${id}`}>
-          <div className="item-img overflow-hidden">
-            <img className='w-full rounded-lg object-cover' src={image} alt="" />
+          <div className="item-img rounded-lg overflow-hidden">
+            <img className='w-full object-cover' src={image} alt="" />
           </div>
         
           <p className='px-4 pt-2'>{name}</p>

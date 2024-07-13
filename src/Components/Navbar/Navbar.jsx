@@ -26,7 +26,11 @@ export default function Navbar() {
         </ul>
 
         <div className="nav-login-cart flex items-center gap-[2.5rem]">
-            <Link to='/login'><button className='px-[2rem] py-[0.5rem] text-[1rem] font-[500] border-[2px] border-black rounded-3xl cursor-pointer active:bg-[#EFF5F5]'>Login</button></Link>
+            {
+                localStorage.getItem('auth-token')
+                ? <button className='px-[2rem] py-[0.5rem] text-[1rem] font-[500] border-[2px] border-black rounded-3xl cursor-pointer active:bg-[#EFF5F5]' onClick={() =>{localStorage.removeItem('auth-token');window.location.replace('/')}}>Logout</button>
+                : <Link to='/login'><button className='px-[2rem] py-[0.5rem] text-[1rem] font-[500] border-[2px] border-black rounded-3xl cursor-pointer active:bg-[#EFF5F5]'>Login</button></Link>
+            }
             <Link to='/cart'><FaShoppingCart className='text-3xl text-[#515151cc]' /></Link>
             <div className="nav-cart-count flex justify-center items-center px-1.5 mt-[-2rem] ml-[-3rem] rounded-full text-[0.7rem] bg-red-500 text-white">{getTotalCartItems()}</div>           
         </div>

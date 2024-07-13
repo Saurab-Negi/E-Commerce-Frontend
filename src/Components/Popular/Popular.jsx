@@ -1,8 +1,22 @@
 import './Popular.css'
-import data_product from '../Assets/data'
 import Item from '../Item/Item'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Popular = () => {
+
+  const [popular, setPopular]= useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/popular/popularwomen')
+        .then((response) => {
+            setPopular(response.data);
+        })
+        .catch((error) => {
+            console.error('Error fetching the data', error);
+        });
+  }, []);
+
   return (
     <div className='popular flex flex-col items-center gap-2'>
         
@@ -10,7 +24,7 @@ const Popular = () => {
         <hr className='w-[20rem] h-1 bg-[#B6BBC4] rounded-xl' />
         <div className="popular-item flex flex-wrap gap-[2rem] my-[5rem]">
             {
-                data_product.map((item, i) =>{
+                popular.map((item, i) =>{
                     return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
                 })
             }
