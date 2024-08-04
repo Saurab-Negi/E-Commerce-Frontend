@@ -5,77 +5,34 @@ export const ShopContext = createContext(null);
 
 const getDefaultCart = () => {
     let cart = {};
-    for (let i = 0; i < 300 + 1; i++) {
+    for (let i = 0; i < 301; i++) {
         cart[i] = 0;
     }
     return cart;
 };
 
 const ShopContextProvider = (props) => {
+    const url = "http://localhost:3000"; // URL for everywhere
+
     const [cartItems, setCartItems] = useState(getDefaultCart());
+    const [token, setToken] = useState("");
     const [all_product, setAll_Product] = useState([]);
 
-    useEffect(() => {
-        axios.get('http://localhost:3000/product/allproduct')
-            .then((response) => {
-                setAll_Product(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching the data', error);
-            });
-
-        const token = localStorage.getItem('auth-token');
-        if (token) {
-            fetchCartItems(token);
+    const addToCart = async (itemId) => {
+        if (!cartItems[itemId]) {
+            setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
+        } else {
+            setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
         }
-    }, []);
-
-    const fetchCartItems = (token) => {
-        axios.post(
-            'http://localhost:3000/cart/getcart',
-            {},
-            {
-                headers: {
-                    Accept: 'application/json',
-                    'auth-token': token,
-                    'Content-Type': 'application/json',
-                },
-            }
-        )
-        .then((response) => {
-            setCartItems(response.data);
-        })
-        .catch((error) => {
-            console.error('Error fetching cart items:', error);
-        });
+        if (token) {
+            await axios.post(url + "/cart/addtocart", { itemId }, { headers: { token } });
+        }
     };
 
-    const addToCart = (itemId) => {
-        setCartItems((prev) => {
-            const updatedCart = { ...prev, [itemId]: (prev[itemId] || 0) + 1 };
-            return updatedCart;
-        });
-
-        const token = localStorage.getItem('auth-token');
+    const removeFromCart = async (itemId) => {
+        setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
         if (token) {
-            axios.post(
-                'http://localhost:3000/cart/addtocart',
-                { itemID: itemId },
-                {
-                    headers: {
-                        Accept: 'application/json',
-                        'auth-token': token,
-                        'Content-Type': 'application/json',
-                    },
-                }
-            )
-            .then((response) => {
-                console.log(response.data);
-                // Optionally update cart items here based on response
-            })
-            .catch((error) => {
-                console.error('Error adding to cart:', error);
-            });
+            await axios.post(url + "/cart/removefromcart", { itemId }, { headers: { token } });
         }
     };
 
@@ -102,7 +59,54 @@ const ShopContextProvider = (props) => {
         return totalItem;
     };
 
-    const contextValue = { all_product, cartItems, addToCart, getTotalCartAmount, getTotalCartItems };
+    const fetchCartItems = async (token) => {
+        try {
+            const response = await axios.post(url + "/cart/getcart", {}, { headers: { token } });
+            setCartItems(response.data);
+        } catch (error) {
+            console.error('Error fetching cart items:', error);
+        }
+    };
+
+    const loadCartData = async (token) => {
+        try {
+            const response = await axios.post(url + "/cart/getcart", {}, { headers: { token } });
+            setCartItems(response.data);
+        } catch (error) {
+            console.error('Error loading cart data:', error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const productResponse = await axios.get(url + '/product/allproduct');
+                setAll_Product(productResponse.data);
+
+                const storedToken = localStorage.getItem("token");
+                if (storedToken) {
+                    setToken(storedToken);
+                    await loadCartData(storedToken);
+                } else {
+                    await fetchCartItems(storedToken);
+                }
+            } catch (error) {
+                console.error('Error fetching the data', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const contextValue = {
+        all_product,
+        cartItems,
+        addToCart,
+        removeFromCart,
+        getTotalCartAmount,
+        getTotalCartItems,
+        url
+    };
 
     return (
         <ShopContext.Provider value={contextValue}>

@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
 import './Auth.css';
+import { ShopContext } from '../../Context/ShopContext';
 
 const Auth = () => {
   const [state, setState] = useState("Login");
+
+  const { url }= useContext(ShopContext);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -19,7 +22,7 @@ const Auth = () => {
     console.log("Login function executed", formData);
     let resData;
     try {
-      const response = await axios.post('http://localhost:3000/user/login', formData, {
+      const response = await axios.post(url+'/user/login', formData, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -43,7 +46,7 @@ const Auth = () => {
     console.log("SignUp function executed", formData);
     let resData;
     try {
-      const response = await axios.post('http://localhost:3000/user/signup', formData, {
+      const response = await axios.post(url+'/user/signup', formData, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',

@@ -13,10 +13,7 @@ export default function Navbar() {
   return (
     <div className='navbar w-full flex justify-around p-[1rem]'>
 
-        <div className="nav-logo flex items-center gap-[1rem]">
-            <img src={logo} alt="" />
-            <p className='text-[2rem] font-[600] text-[#171717]'>SHOPPER</p>
-        </div>
+        <img className='nav-logo w-16 cursor-pointer' src={logo} alt="" />
 
         <ul className="nav-menu flex list-none items-center gap-[3rem] text-[1rem] text-[#626262]">
             <li onClick={()=>{setMenu('shop')}}><Link to='/'>Shop{menu=='shop' ? <hr/> : <></>}</Link></li>

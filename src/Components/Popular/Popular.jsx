@@ -1,14 +1,17 @@
 import './Popular.css'
 import Item from '../Item/Item'
-import { useEffect, useState } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import axios from 'axios'
+import { ShopContext } from '../../Context/ShopContext'
 
 const Popular = () => {
+
+ const { url }= useContext(ShopContext);
 
   const [popular, setPopular]= useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/popular/popularwomen')
+    axios.get(url+'/popular/popularwomen')
         .then((response) => {
             setPopular(response.data);
         })

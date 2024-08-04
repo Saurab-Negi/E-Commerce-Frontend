@@ -1,14 +1,17 @@
 import './NewCollections.css'
 import Item from '../Item/Item'
-import { useEffect, useState } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import axios from 'axios'
+import { ShopContext } from '../../Context/ShopContext'
 
 const NewCollections = () => {
+
+  const { url }= useContext(ShopContext);
 
   const [new_collection, setNew_Collection]= useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/collection/newcollection')
+    axios.get(url+'/collection/newcollection')
         .then((response) => {
             setNew_Collection(response.data);
         })

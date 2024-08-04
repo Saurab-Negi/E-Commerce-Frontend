@@ -1,16 +1,20 @@
 import axios from 'axios';
 import './ListProduct.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { MdDeleteForever } from "react-icons/md";
+import { ShopContext } from '../../Context/ShopContext';
 
 const ListProduct = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const { url }= useContext(ShopContext);
+
   const productsPerPage = 10; // Adjust as needed
 
   const fetchInfo = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/product/allproduct');
+      const res = await axios.get(url+'/product/allproduct');
       setAllProducts(res.data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -24,7 +28,7 @@ const ListProduct = () => {
 
   const removeProduct = async (id) => {
     try {
-      await axios.post('http://localhost:3000/product/deleteproduct', 
+      await axios.post(url+'/product/deleteproduct', 
         { id: id }, 
         {
           headers: {
